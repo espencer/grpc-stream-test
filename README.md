@@ -25,3 +25,16 @@ Generate `.go` from `.proto`:
 ```
 protoc streaming_service.proto --go_out=plugins=grpc:.
 ```
+
+Running the server:
+
+```
+go run server.go streaming_service.pb.go
+```
+
+Running the client, in other terminal:
+
+```
+export GOPATH=`pwd`
+go run client.go streaming_service.pb.go
+```

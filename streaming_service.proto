@@ -1,13 +1,11 @@
 syntax = "proto3";
 
-// option java_multiple_files = true;
-option java_package = "io.grpc.examples.routeguide";
-// option java_outer_classname = "RouteGuideProto";
+option go_package = "main";
 
 package com.bbva.semaas.streamingtest;
 
 service StreamingService {
-    rpc StreamIt(Empty) returns (stream Event) {}
+    rpc StreamIt(Empty) returns (Event) {}
 }
 
 message Empty {
