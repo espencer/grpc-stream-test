@@ -4,7 +4,6 @@ import (
 	"log"
 	"net"
 
-	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -16,10 +15,11 @@ const (
 // server is used to implement StreamingServiceClient
 type server struct{}
 
-func (s *server) StreamIt(context.Context, *Empty) (*Event, error) {
-
+func (s *server) StreamIt(in *Empty, downstream StreamingService_StreamItServer) error {
 	log.Println("Request received")
-	return &Event{1234}, nil
+
+	downstream.Send(&Event{12345})
+	return nil
 }
 
 func main() {

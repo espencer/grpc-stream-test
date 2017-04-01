@@ -9,7 +9,6 @@ import (
 
 const (
 	address     = "localhost:50051"
-	defaultName = "world"
 )
 
 func main() {
@@ -25,5 +24,13 @@ func main() {
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
-	log.Printf("Greeting: %s", r.Payload)
+
+	for {
+		payload, err := r.Recv()
+		if err != nil {
+			log.Printf("Error received %+v\n", err)
+			break
+		}
+		log.Printf("payload: %s", payload)
+	}
 }

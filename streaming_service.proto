@@ -5,7 +5,7 @@ option go_package = "main";
 package com.bbva.semaas.streamingtest;
 
 service StreamingService {
-    rpc StreamIt(Empty) returns (Event) {}
+    rpc StreamIt(Empty) returns (stream Event) {}
 }
 
 message Empty {
