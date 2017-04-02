@@ -5,10 +5,12 @@ import (
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"runtime"
+	"fmt"
 )
 
 const (
-	address     = "localhost:50051"
+	address = "localhost:50051"
 )
 
 func main() {
@@ -28,9 +30,13 @@ func main() {
 	for {
 		payload, err := r.Recv()
 		if err != nil {
+			fmt.Println()
 			log.Printf("Error received %+v\n", err)
 			break
 		}
-		log.Printf("payload: %s", payload)
+		_ = payload
+		ms := runtime.MemStats{}
+		runtime.ReadMemStats(&ms)
+		fmt.Printf("\rServing. Alloc %10d, Sys %10d.", ms.Alloc, ms.Sys)
 	}
 }
