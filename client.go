@@ -7,10 +7,13 @@ import (
 	"google.golang.org/grpc"
 	"runtime"
 	"fmt"
+	"time"
 )
 
 const (
 	address = "localhost:50051"
+
+	sleep = 150 * time.Millisecond
 )
 
 func main() {
@@ -38,5 +41,9 @@ func main() {
 		ms := runtime.MemStats{}
 		runtime.ReadMemStats(&ms)
 		fmt.Printf("\rServing. Alloc %10d, Sys %10d.", ms.Alloc, ms.Sys)
+
+		if sleep > 0 {
+			time.Sleep(sleep)
+		}
 	}
 }
