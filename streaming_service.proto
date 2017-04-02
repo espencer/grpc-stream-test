@@ -12,5 +12,5 @@ message Empty {
 }
 
 message Event {
-    int32 payload = 1;
+    string payload = 1;
 }
